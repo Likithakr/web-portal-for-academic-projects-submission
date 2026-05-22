@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-image: url("/static/images/bg.jpeg");
+            color: black;
+        }
+
+/* Center container properly */
+.container {
+    width: 400px;              /* small width */
+    margin: 80px auto;         /* center horizontally */
+    padding: 25px 30px;
+    background: rgb(84, 142, 228);
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgb(132, 120, 160);
+    text-align: center;
+}
+
+/* Menu buttons */
+.menu a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background: rgb(157, 157, 214);
+    color: rgb(12, 11, 11);
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Logout button */
+.logout {
+    float: right;
+    background: black;
+    color: rgb(181, 211, 245);
+    padding: 6px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Heading */
+h2 {
+    color: rgb(20, 20, 20);
+}
+        
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a class="logout" href="/logout">Logout</a>
+
+    <h2>Welcome Student Dashboard</h2>
+
+    <div class="menu">
+        <a href="/submit">Submit New Project</a>
+        <a href="/status">View Project Status</a>
+        <a href="/all_projects">View All Projects</a>
+    </div>
+
+    <br>
+
+    <p>
+        From this dashboard you can:
+    </p>
+
+    <ul style="text-align:left; display:inline-block;">
+        <li>Submit your academic project</li>
+        <li>Upload project report PDF</li>
+        <li>Check approval status</li>
+        <li>View suggestions for improvements</li>
+    </ul>
+
+</div>
+
+</body>
+</html>

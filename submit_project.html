@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Project</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+
+            background: url("/static/images/bg.jpeg") no-repeat center center/cover;
+            height: 100vh;
+        }
+
+        /* Heading at top */
+        h2 {
+            text-align: center;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Container */
+        .container {
+            width: 420px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(181, 214, 236, 0.15);
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px black;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Form layout */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Labels */
+        label {
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            width: 100%;
+            color: white;          /* 🔥 white labels */
+            font-weight: bold;
+        }
+
+        /* Inputs */
+        input, textarea {
+            width: 100%;
+            max-width: 320px;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        /* File input */
+        input[type="file"] {
+            background: rgba(255,255,255,0.7);
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            max-width: 320px;
+            margin-top: 25px;
+            padding: 12px;
+            background: #1de9b6;
+            color: black;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00bfa5;
+            color: white;
+        }
+                .back {
+            float: right;
+            background: black;
+            color: white;
+            padding: 6px 10px;
+            text-decoration: none;
+        }
+
+        .error{
+    color: yellow;
+    background: rgba(255,0,0,0.3);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+<!-- 🔥 Heading at top -->
+<h2>Submit Project</h2>
+
+<!-- 🔥 Form container -->
+<div class="container">
+
+        <a class="back" href="/dashboard">Back to Dashboard</a>
+        {% if error %}
+    <p class="error">{{ error }}</p>
+{% endif %}
+
+    <!-- ✅ Correct form -->
+    <form method="POST" action="/submit" enctype="multipart/form-data">
+
+        <label>Name:</label>
+        <input type="text" name="Name" required>
+
+        <label>Title:</label>
+        <input type="text" name="title" required>
+
+        <label>Programming Language:</label>
+        <input type="text" name="Programming_language" required>
+
+        <label>Upload Report (PDF):</label>
+        <input type="file" name="report" required>
+
+        <label>Upload Project ZIP:</label>
+        <input type="file" name="zipfile" required>
+
+        <button type="submit">Submit Project</button>
+
+    </form>
+
+</div>     
+
+</body>
+</html>

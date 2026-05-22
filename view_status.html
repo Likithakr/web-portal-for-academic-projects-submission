@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Status</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-image: url("/static/images/bg.jpeg");
+            background-size: cover;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid rgb(8, 8, 8);
+            text-align: center;
+        }
+
+        th {
+            background: rgb(143, 208, 219);
+            color: rgb(17, 16, 16);
+        }
+
+        .back {
+            float: right;
+            background: black;
+            color: white;
+            padding: 6px 10px;
+            text-decoration: none;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        .approved {
+            color: green;
+            font-weight: bold;
+        }
+
+        .rejected {
+            color: rgb(231, 125, 125);
+            font-weight: bold;
+        }
+
+        .pending {
+            color: rgb(62, 116, 89);
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <a class="back" href="/dashboard">Back to Dashboard</a>
+
+    <h2>Your Project Status</h2>
+
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Programming Language</th>
+        <th>Report</th>
+        <th>Project ZIP</th>
+        <th>Status</th>
+        <th>Suggestion</th>
+    </tr>
+
+    {% for p in projects %}
+    <tr>
+        <td>{{ p.Name }}</td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.Programming_language }}</td>
+
+        <td>
+            <a href="/static/reports/{{ p.report_file }}" target="_blank">
+                View PDF
+            </a>
+        </td>
+
+        <td>
+            <a href="/static/zips/{{ p.zip_file }}" target="_blank">
+                Download ZIP
+            </a>
+        </td>
+
+        <!-- STATUS -->
+        <td>
+            {% if p.status == "Approved" %}
+                <span class="approved">{{ p.status }}</span>
+            {% elif p.status == "Rejected" %}
+                <span class="rejected">{{ p.status }}</span>
+            {% else %}
+                <span class="pending">{{ p.status }}</span>
+            {% endif %}
+        </td>
+
+        <!-- ✅ SUGGESTION COLUMN -->
+        <td>
+            {% if p.suggestion %}
+                {{ p.suggestion }}
+            {% else %}
+                No suggestion yet
+            {% endif %}
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+</body>
+</html>

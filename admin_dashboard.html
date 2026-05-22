@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("/static/images/bg.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            color:#333;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Admin Dashboard</h2>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Programming_language</th>
+            <th>Report / ZIP</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Suggestion</th>
+        </tr>
+
+        {% for p in projects %}
+        <tr>
+            <td>{{ p.Name }}</td>
+            <td>{{ p.title }}</td>
+            <td>{{ p.Programming_language }}</td>
+            <td>
+                <a href="/static/reports/{{ p.report_file }}">View PDF</a><br>
+                <a href="/static/zips/{{ p.zip_file }}">Download</a>
+            </td>
+            <td>{{ p.status }}</td>
+            <td>
+                <a href="/admin/approve/{{ p.id }}">Approve</a><br>
+                <a href="/admin/reject/{{ p.id }}">Reject</a>
+            </td>
+            <td>
+                
+    <form action="/add_suggestion/{{ p.id }}" method="POST">
+        <textarea name="suggestion" placeholder="Enter suggestion"></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</td>
+    
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>

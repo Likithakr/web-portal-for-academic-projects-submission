@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Projects</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+            /* 🌄 Background Image */
+            background: url('/static/images/bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 95%;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95); /* transparent white */
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px gray;
+        }
+
+        h2 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #383bcf;
+            text-align: center;
+        }
+
+        th {
+            background: rgb(55, 99, 156);
+            color: rgb(12, 13, 14);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(13, 13, 14);
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: red;
+        }
+
+        /* Status Colors */
+        .approved {
+            color: green;
+            font-weight: bold;
+        }
+
+        .rejected {
+            color: red;
+            font-weight: bold;
+        }
+
+        .pending {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .back {
+            float: right;
+            background: black;
+            color: rgb(159, 185, 223);
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back:hover {
+            background: gray;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <a class="back" href="/dashboard">⬅ Back</a>
+
+    <h2>All Student Projects</h2>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Programming Language</th>
+            <th>Report</th>
+            <th>ZIP</th>
+            <th>Status</th>
+            <th>Suggestion</th>
+        </tr>
+
+        {% for p in projects %}
+        <tr>
+            <td>{{ p.Name or "N/A" }}</td>
+            <td>{{ p.title or "N/A" }}</td>
+            <td>{{ p.Programming_language or "N/A" }}</td>
+
+            <!-- Report -->
+            <td>
+                {% if p.report_file %}
+                    <a href="{{ url_for('static', filename='reports/' ~ p.report_file) }}" target="_blank">
+                        View
+                    </a>
+                {% else %}
+                    No file
+                {% endif %}
+            </td>
+
+            <!-- ZIP -->
+            <td>
+                {% if p.zip_file %}
+                    <a href="{{ url_for('static', filename='zips/' ~ p.zip_file) }}" target="_blank">
+                        Download
+                    </a>
+                {% else %}
+                    No file
+                {% endif %}
+            </td>
+
+            <!-- Status -->
+            <td>
+                {% if p.status == "Approved" %}
+                    <span class="approved">Approved</span>
+                {% elif p.status == "Rejected" %}
+                    <span class="rejected">Rejected</span>
+                {% else %}
+                    <span class="pending">Pending</span>
+                {% endif %}
+            </td>
+
+            <!-- Suggestion -->
+            <td>
+                {{ p.suggestion or "No suggestion" }}
+            </td>
+
+        </tr>
+        {% else %}
+        <!-- If no data -->
+        <tr>
+            <td colspan="7" style="text-align:center;">No projects found</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>
